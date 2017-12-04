@@ -12,6 +12,6 @@ int main() {
         std::cin >> left;
         std::cin >> right;
         std::cout << abs(right-left) << std::endl;
-        if(getchar()==EOF) return 0;
+        if(std::cin.eof()) return 0;
     }
 }
