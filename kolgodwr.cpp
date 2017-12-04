@@ -1,40 +1,33 @@
-#include <stdio.h>
+//#include <stdio.h>
 #include <iostream>
-
-#include BLADKOMPIL
+#include <string>
+#include <vector>
 
 using namespace std;
 
-void worker() {
-    short unsigned int cyfry[10];
-    short unsigned int liczba = 0;
-    char c;
-    while(true) {
-        c = getchar();
-        short unsigned int cyfra = 0;
-        switch(c) {
-            case '9': cyfra++;
-            case '8': cyfra++;
-            case '7': cyfra++;
-            case '6': cyfra++;
-            case '5': cyfra++;
-            case '4': cyfra++;
-            case '3': cyfra++;
-            case '2': cyfra++;
-            case '1': cyfra++;
-            case '0': liczba++;
-            case EOF: goto byleof;
-        }
-        cyfry[liczba] = cyfra;
+const unsigned pow[] = {1,10,100,1000,10000,100000,1000000,10000000,100000000,1000000000};
+
+unsigned reverse(unsigned in) {
+    unsigned out;
+    short unsigned exponent=0;
+    for(short unsigned i=9;i<=0;i--) {
+        short unsigned cyfra = static_cast<unsigned short>((in / pow[i]) % 10);
     }
-    bool pali = true;
-    for(short unsigned int i = 0; i<)
-    byleof:
+}
+
+short unsigned addcount(unsigned in, short unsigned already) {
+
+}
+
+void worker() {
+    unsigned in;
+    cin >> in;
+
 }
 
 int main() {
-    unsigned int n;
+    unsigned n;
     cin >> n;
-    getchar();
+    //getchar();
     for(;n>0;n--) worker();
 }
