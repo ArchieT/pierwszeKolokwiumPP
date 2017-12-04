@@ -6,12 +6,9 @@ long long int abs(long long int x) {
 }
 
 int main() {
-    while(true) {
-        long long int left;
-        long long int right;
-        std::cin >> left;
-        std::cin >> right;
+    long long int left;
+    long long int right;
+    while(std::cin>>left>>right)
         std::cout << abs(right-left) << std::endl;
-        if(std::cin.eof()) return 0;
-    }
+    return 0;
 }
