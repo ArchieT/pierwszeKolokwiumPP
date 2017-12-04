@@ -1,9 +1,10 @@
 #include <iostream>
-#include <cstdio>
+//#include <cstdio>
+//#include <string>
 
 using namespace std;
 
-//wykonywanie jednego testu, zwracanie exitcode
+/*/wykonywanie jednego testu, zwracanie exitcode
 unsigned char worker() {
     int tab[1000]; //tablica 1000 pierwszych znaków
     for (int &ip : tab) ip = 0; //zerowanie tablicy
@@ -30,12 +31,24 @@ unsigned char worker() {
         cout << (y ? "y" : "n") << endl;
     }
     return 0;
+}*/
+
+unsigned char worker() {
+    string s;
+    cin >> s;
+    unsigned int q;
+    cin >> q;
+    for (; q > 0; q--) {
+        string t;
+        cin >> t;
+        cout << (s.substr(0, t.size()) == t ? "y" : "n") << endl;
+    }
 }
 
 int main() {
     unsigned short int k; //liczba testów
     cin >> k; //biorę ją iostream
-    getchar(); //a potem zabieram chara tego newline'a
+    //getchar(); //a potem zabieram chara tego newline'a
     unsigned char exitcode;
     for (; k > 0; k--) // k-razy odpalam workera
         if ((exitcode = worker()) > 0) //chcę debugować exitcode'ami
