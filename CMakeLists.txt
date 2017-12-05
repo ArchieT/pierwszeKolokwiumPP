@@ -4,6 +4,7 @@ project(pierwszeKolokwiumPP)
 set(CMAKE_CXX_STANDARD 98)
 
 add_executable(kA kolakotprot.cpp)
+add_executable(kB kolbident.cpp)
 add_executable(kG kolgodwr.cpp)
 add_executable(kH kolhdzielnywojownik.cpp)
 add_executable(kI kolizbierbut.cpp)
