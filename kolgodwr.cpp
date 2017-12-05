@@ -17,16 +17,7 @@ unsigned reverse(unsigned in) {
 }
 
 bool palindrome(unsigned in) {
-    unsigned left = 0;
-    unsigned right = in;
-    unsigned srodek = 0;
-    for (short i = 9; i >= 0; i--) {
-        left = left*10 + right / pow[i];
-        right = right % pow[i];
-        if (right == reverse(left)) return true;
-        if (right!=0 && right == reverse(left/10)) return true;
-    }
-    return false;
+    return in==reverse(in);
 }
 
 struct Result {
