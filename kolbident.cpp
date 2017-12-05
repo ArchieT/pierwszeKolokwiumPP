@@ -23,21 +23,7 @@ bool ok_occur(std::string input, std::map<char, short unsigned> &occurences) {
     return true;
 }
 
-long unsigned value(std::string input, short unsigned base,
-                    std::map<char, short unsigned> &digit_meanings) {
-    std::vector<char> &
-    std::string reversed(input);
-    std::reverse(reversed.begin(), reversed.end());
-    unsigned expo = 0;
-    long unsigned int value = 0;
-    for (char i : reversed) {
-        value += pow(base, expo) * digit_meanings[i];
-        expo++;
-    }
-    return value;
-}
-
-std::string reverse_writing(unsigned long value, unsigned long valueminus1
+std::string reverse_writing(unsigned long value, unsigned long valueminus1,
                             short unsigned base, std::vector<char> &digits) {
     return std::string(1, digits[value % base]) +
            ((value / base) || (valueminus1 / base)
