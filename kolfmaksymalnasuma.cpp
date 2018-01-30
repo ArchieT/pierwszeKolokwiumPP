@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <cassert>
+//#include <sys/resource.h>
 
 using namespace std;
 
@@ -13,19 +14,19 @@ short int t[100][100];
 //int qb[101][101][101][101];
 
 int max(int a, int b, int c) {
-    if(a>b) {
-        if (c>a) return c;
+    if (a > b) {
+        if (c > a) return c;
         return a;
     } else {
-        if(c>b) return c;
+        if (c > b) return c;
         return b;
     }
 }
 
 int worker(/*short unsigned*/int leftfirst,
-           /*short unsigned*/int rightend,
-           /*short unsigned*/int topfirst,
-           /*short unsigned*/int bottomend) {
+        /*short unsigned*/int rightend,
+        /*short unsigned*/int topfirst,
+        /*short unsigned*/int bottomend) {
     //if(q[leftfirst][rightend][topfirst][bottomend])])
     assert(leftfirst >= 0);
     assert(rightend <= n);
@@ -40,43 +41,41 @@ int worker(/*short unsigned*/int leftfirst,
             a = t[topfirst][leftfirst];
             b = t[topfirst + 1][leftfirst];
             c = a + b;
-            return max(a,b,c);
-        } else {
-            short unsigned u = (topfirst + bottomend) >> 1;
-            a = worker(leftfirst, rightend, topfirst, u);
-            b = worker(leftfirst, rightend, u, bottomend);
-            c = a + b;
-            return max(a,b,c);
-        }
-    } else if (leftfirst + 2 == rightend) {
-        if (topfirst + 1 == bottomend) {
-            a = t[topfirst][leftfirst];
-            b = t[topfirst][leftfirst + 1];
-            c = a + b;
-            return max(a, b, c);
-        } else {
-            u = (topfirst + bottomend) >> 1;
-            a = worker(leftfirst, rightend, topfirst, u);
-            b = worker(leftfirst, rightend, u, bottomend);
-            c = a + b;
             return max(a, b, c);
         }
-    } else if (topfirst>=bottomend-2) {
+    } else if (
+            (leftfirst + 2 == rightend) &&
+            (topfirst + 1 == bottomend)) {
+        a = t[topfirst][leftfirst];
+        b = t[topfirst][leftfirst + 1];
+        c = a + b;
+        return max(a, b, c);
+    }
+    if (topfirst >= bottomend - 2) {
         u = (leftfirst + rightend) >> 1;
         a = worker(leftfirst, u, topfirst, bottomend);
         b = worker(u, rightend, topfirst, bottomend);
         c = a + b;
-        return max(a,b,c);
+        return max(a, b, c);
     } else {
         u = (topfirst + bottomend) >> 1;
         a = worker(leftfirst, rightend, topfirst, u);
         b = worker(leftfirst, rightend, u, bottomend);
         c = a + b;
-        return max(a,b,c);
+        return max(a, b, c);
     }
 }
 
 int main() {
+//    const rlim_t kStackSize = 16 * 1024 * 1024;
+//    struct rlimit rl;
+//    int result;
+//    if (result == 0) {
+//        if (rl.rlim_cur < kStackSize) {
+//            rl.rlim_cur = kStackSize;
+//            setrlimit(RLIMIT_STACK, &rl);
+//        }
+//    }
     cin >> n;
     for (short unsigned i = 0; i < n; i++)
         for (short unsigned j = 0; j < n; j++)
