@@ -22,6 +22,9 @@ int max(int a, int b, int c) {
         return b;
     }
 }
+int max(int a, int b, int c, int d, int e) {
+    return max(max(a,b,c),d,e);
+}
 
 int worker(/*short unsigned*/int leftfirst,
         /*short unsigned*/int rightend,
@@ -32,7 +35,7 @@ int worker(/*short unsigned*/int leftfirst,
     assert(rightend <= n);
     assert(topfirst >= 0);
     assert(bottomend <= n);
-    int a, b, c;
+    int a, b, c, d, e;
     /*short unsigned*/int u;
     if (leftfirst + 1 == rightend) {
         if (topfirst + 1 == bottomend)
@@ -42,28 +45,38 @@ int worker(/*short unsigned*/int leftfirst,
             b = t[topfirst + 1][leftfirst];
             c = a + b;
             return max(a, b, c);
+        } else {
+            e=0;
+            for(int i=topfirst;i<bottomend;i++)
+                e+=t[i][leftfirst];
+            a = worker(leftfirst,rightend,topfirst+1,bottomend);
+            b = worker(leftfirst,rightend,topfirst,bottomend-1);
+            return max(a,b,e);
         }
-    } else if (
-            (leftfirst + 2 == rightend) &&
-            (topfirst + 1 == bottomend)) {
-        a = t[topfirst][leftfirst];
-        b = t[topfirst][leftfirst + 1];
-        c = a + b;
-        return max(a, b, c);
+    } else if (topfirst + 1 == bottomend) {
+        if (leftfirst + 2 == rightend) {
+            a = t[topfirst][leftfirst];
+            b = t[topfirst][leftfirst + 1];
+            c = a + b;
+            return max(a, b, c);
+        } else {
+            e=0;
+            for(int j=leftfirst;j<rightend;j++)
+                e+=t[topfirst][j];
+            a = worker(leftfirst+1,rightend,topfirst,bottomend);
+            b = worker(leftfirst,rightend-1,topfirst,bottomend);
+            return max(a,b,e);
+        }
     }
-    if (topfirst >= bottomend - 2) {
-        u = (leftfirst + rightend) >> 1;
-        a = worker(leftfirst, u, topfirst, bottomend);
-        b = worker(u, rightend, topfirst, bottomend);
-        c = a + b;
-        return max(a, b, c);
-    } else {
-        u = (topfirst + bottomend) >> 1;
-        a = worker(leftfirst, rightend, topfirst, u);
-        b = worker(leftfirst, rightend, u, bottomend);
-        c = a + b;
-        return max(a, b, c);
-    }
+    e = 0;
+    for (int i = topfirst; i < bottomend; i++)
+        for (int j = leftfirst; j < rightend; j++)
+            e += t[i][j];
+    a = worker(leftfirst+1,rightend,topfirst,bottomend);
+    b = worker(leftfirst,rightend-1,topfirst,bottomend);
+    c = worker(leftfirst,rightend,topfirst+1,bottomend);
+    d = worker(leftfirst,rightend,topfirst,bottomend-1);
+    return max(a,b,c,d,e);
 }
 
 int main() {
