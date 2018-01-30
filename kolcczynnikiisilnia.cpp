@@ -24,7 +24,9 @@ bool gp(short unsigned int p) {
 void worker(short unsigned in, ostream &o) {
     cout << setw(3) << in << "! =" << endl;
     short unsigned cur = 2;
-    for(;cur<in;)
+    for(;cur<in;cur++) {
+
+    }
 }
 
 int main() {
@@ -43,6 +45,6 @@ int main() {
     pier[12]=false;
     pier[13]=true;
     short unsigned in;
-    do cin >> in; while (in!=0);
+    do { cin >> in; worker(in,cout); } while (in!=0);
     return 0;
 }
